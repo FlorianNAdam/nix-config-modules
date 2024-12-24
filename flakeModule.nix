@@ -25,10 +25,4 @@ in
       };
     };
   };
-
-  config = {
-    flake = {
-      nixosConfigurations = config.nix-config.nixosConfigurations;
-    };
-  };
 }
