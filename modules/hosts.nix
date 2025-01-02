@@ -85,6 +85,11 @@ let
           '';
         };
 
+        modules = mkOption {
+          type = types.listOf types.deferredModule;
+          default = [ ];
+        };
+
       };
 
       config = {
