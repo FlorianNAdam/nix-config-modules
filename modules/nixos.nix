@@ -41,7 +41,7 @@ let
           customModules =
             (lib.evalModules {
               modules = [ customModule2 ];
-            }).nix-config2;
+            }).config.nix-config2;
         in
         {
           _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ customModules;
