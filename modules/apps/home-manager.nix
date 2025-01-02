@@ -1,6 +1,3 @@
-# We need some home-manager integrations for users on NixOS
-# systems. This is optionally enabled when you want to use
-# home-manger.
 { inputs, ... }:
 {
   config = {

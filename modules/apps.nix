@@ -20,9 +20,7 @@ let
         _internal.apps = mkOption {
           type = types.listOf types.raw;
           description = ''
-            The list of apps enabled for this host, containing deferred modules
             for initializing later module systems. This is used internally to
-            track per-host app configurations, since each host will enable its own
             set of apps.
 
             Do not specify or override this attribute unless you know what you're
@@ -38,13 +36,7 @@ let
             }).config.apps;
         in
         {
-          _internal.apps = builtins.filter (
-            app:
-            app.enablePredicate {
-              host = config;
-              inherit app;
-            }
-          ) (lib.attrValues apps);
+          _internal.apps = builtins.filter (app: app.enable) (lib.attrValues apps);
         };
     }
   );
@@ -62,11 +54,9 @@ in
       example = ''
         apps.emacs = {
           nixos = {
-            services.emacs.enable = true;
           };
           home = { pkgs, ... }: {
             programs.emacs = {
-              enable = true;
               package = pkgs.emacsUnstable;
             };
           };

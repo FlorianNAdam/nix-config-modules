@@ -19,13 +19,6 @@ types.submodule {
         If set, enables or disables the given app. This overrides tag behavior.
       '';
     };
-    enablePredicate = mkOption {
-      type = types.functionTo types.bool;
-      default = { host, app, ... }: if (app.enable != null) then app.enable else false;
-      description = lib.mdDoc ''
-        Predicate used to determine if the given app should be enabled on the given host.
-      '';
-    };
     home = mkOption {
       type = types.deferredModule;
       default = { };
