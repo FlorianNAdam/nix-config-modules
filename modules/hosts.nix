@@ -5,7 +5,6 @@ let
     mkOption
     types
     ;
-  appType = import ./lib/appType.nix args;
 
   mkModuleOption =
     description:
