@@ -40,7 +40,7 @@ let
             };
           customModules =
             (lib.evalModules {
-              modules = [ customModule2 ];
+              modules = [ customModule2 ] ++ config.modules2;
             }).config.nix-config2;
         in
         {
