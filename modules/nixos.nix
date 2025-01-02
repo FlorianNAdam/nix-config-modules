@@ -58,9 +58,14 @@ let
             (lib.evalModules {
               modules = [ customModule2 ] ++ config.modules2;
             }).config.nix-config2.nixos;
+          customHomeModules =
+            (lib.evalModules {
+              modules = [ customModule2 ] ++ config.modules2;
+            }).config.nix-config2.home;
         in
         {
           _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ customModules ];
+          _internal.homeModules = [ customHomeModules ];
         };
     }
   );
