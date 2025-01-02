@@ -145,7 +145,7 @@ let
       config._internal =
         let
           host = builtins.removeAttrs config [
-            # "_internal"
+            "_internal"
             "nix-config"
           ];
           nixPkgsModules = globalNixPkgsModules ++ [ config.nixpkgs ];
