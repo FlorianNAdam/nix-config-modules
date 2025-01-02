@@ -85,7 +85,7 @@ let
           '';
         };
 
-        modules = mkOption {
+        modules2 = mkOption {
           type = types.listOf types.deferredModule;
           default = [ ];
         };
