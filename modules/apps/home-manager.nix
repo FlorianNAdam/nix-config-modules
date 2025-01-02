@@ -5,8 +5,6 @@
 {
   config = {
     apps.hm-single-user-integration = {
-      enablePredicate = { host, ... }: host.tags.home-manager && host.tags.single-user;
-
       nixos =
         { host, ... }:
         {
