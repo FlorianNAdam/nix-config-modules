@@ -17,7 +17,9 @@ let
     { ... }:
     {
       options = {
-        nix-config2 = types.raw;
+        nix-config2 = mkOption {
+          type = types.raw;
+        };
       };
     };
 
