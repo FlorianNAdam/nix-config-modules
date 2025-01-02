@@ -21,7 +21,7 @@ let
           type = types.submodule {
             options = {
               nixos = mkOption {
-                type = types.raw;
+                type = types.deferredModule;
               };
             };
           };
@@ -42,8 +42,11 @@ let
         '';
       };
       config._internal.nixosModules =
-        [ customModule2 ] ++ globalNixosModules ++ [ config.nixos ] ++ config.modules2;
-      # ++ [ config.nix-config2 ];
+        [ customModule2 ]
+        ++ globalNixosModules
+        ++ [ config.nixos ]
+        ++ config.modules2
+        ++ [ config.nix-config2.nixos ];
     }
   );
 
