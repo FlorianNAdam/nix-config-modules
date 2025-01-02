@@ -16,7 +16,7 @@ let
     };
 
   hostType = types.submodule (
-    { name, ... }:
+    { name, config, ... }:
     {
       options = {
         name = mkOption {
@@ -62,6 +62,29 @@ let
         nixpkgs = mkModuleOption "nixpkgs configurations";
         nixos = mkModuleOption "NixOS configurations";
         home = mkModuleOption "home-manager configurations";
+
+        username = mkOption {
+          type = types.str;
+          default = "user";
+          description = ''
+            The username of the single user for this system.
+          '';
+        };
+        email = mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            The email for the single user.
+          '';
+        };
+        homeDirectory = mkOption {
+          type = types.path;
+          default = "/home/${config.username}";
+          description = lib.mdDoc ''
+            The path to the home directory for this user. Defaults to
+            `/home/<username>`
+          '';
+        };
 
       };
 
