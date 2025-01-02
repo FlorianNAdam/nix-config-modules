@@ -26,30 +26,25 @@ let
         '';
       };
 
-      config._internal.nixosModules =
+      config =
         let
           customModule2 =
-            { config, ... }:
+            { config, host, ... }:
             {
               options = {
                 nix-config2 = mkOption {
-                  type = types.submodule {
-                    options = {
-                      nixos = mkOption {
-                        type = types.deferredModule;
-                      };
-                    };
-                  };
+                  type = types.listOf types.deferredModule;
                 };
               };
             };
+          customModules =
+            (lib.evalModules {
+              modules = [ customModule2 ];
+            }).nix-config2;
         in
-
-        [ customModule2 ]
-        ++ globalNixosModules
-        ++ [ config.nixos ]
-        ++ config.modules2
-        ++ [ config.nix-config2.nixos ];
+        {
+          _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ customModules;
+        };
     }
   );
 
