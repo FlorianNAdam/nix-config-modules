@@ -25,7 +25,7 @@ let
           using `host.<name>.nixos` instead.
         '';
       };
-      config._internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ config.modules2 ];
+      config._internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ config.modules2;
     }
   );
 
