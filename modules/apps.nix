@@ -36,7 +36,7 @@ let
             }).config.apps;
         in
         {
-          _internal.apps = builtins.filter (app: app.enable) (lib.attrValues apps);
+          _internal.apps = lib.attrValues apps;
         };
     }
   );

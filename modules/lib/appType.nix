@@ -12,13 +12,6 @@ types.submodule {
   _file = __curPos.file;
 
   options = {
-    enable = mkOption {
-      type = types.nullOr types.bool;
-      default = null;
-      description = ''
-        If set, enables or disables the given app. This overrides tag behavior.
-      '';
-    };
     home = mkOption {
       type = types.deferredModule;
       default = { };
