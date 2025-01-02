@@ -92,9 +92,13 @@ let
 
       };
 
-      config = {
-        inherit name;
-      };
+      config =
+        {
+          inherit name;
+        }
+        // lib.evalModules {
+          modules = config.modules;
+        };
     }
   );
 in
