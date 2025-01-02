@@ -32,16 +32,32 @@ let
             { config, host, ... }:
             {
               options = {
+                # nix-config2 = mkOption {
+                #   type = types.deferredModule;
+                #   default = [ ];
+                # };
+
                 nix-config2 = mkOption {
-                  type = types.deferredModule;
-                  default = [ ];
+                  type = types.submodule {
+                    options = {
+                      nixos = mkOption {
+                        type = types.deferredModule;
+                      };
+                      home = mkOption {
+                        type = types.deferredModule;
+                      };
+                      nixpkgs = mkOption {
+                        type = types.deferredModule;
+                      };
+                    };
+                  };
                 };
               };
             };
           customModules =
             (lib.evalModules {
               modules = [ customModule2 ] ++ config.modules2;
-            }).config.nix-config2;
+            }).config.nix-config2.nixos;
         in
         {
           _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ customModules ];
