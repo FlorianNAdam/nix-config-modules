@@ -29,7 +29,7 @@ let
         globalNixosModules
         ++ (map (app: app.nixos) config._internal.apps)
         ++ [ config.nixos ]
-        ++ [ config.nix-config.nixos2 ];
+        ++ [ config.nixos2 ];
     }
   );
 
