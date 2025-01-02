@@ -5,7 +5,4 @@
   ./modules.nix
   ./nixos.nix
   ./nixpkgs.nix
-  ./apps/defaults.nix
-  ./apps/single-user.nix
-  ./apps/home-manager.nix
 ]
