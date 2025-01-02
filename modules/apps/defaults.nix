@@ -5,20 +5,21 @@
 { inputs, ... }:
 {
   apps.host-config = {
-    tags = [ "defaults" ];
-    nixos = { host, pkgs, ... }: {
-      nix = {
-        registry = {
-          nixpkgs.flake = inputs.nixpkgs;
-        };
-        settings = {
-          trusted-users = [ "root" ];
-          experimental-features = [ "nix-command" "flakes" ];
+    nixos =
+      { host, pkgs, ... }:
+      {
+        nix = {
+          registry = {
+            nixpkgs.flake = inputs.nixpkgs;
+          };
+          settings = {
+            trusted-users = [ "root" ];
+            experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+          };
         };
       };
-    };
-  };
-  defaultTags = {
-    defaults = true;
   };
 }

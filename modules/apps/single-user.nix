@@ -48,7 +48,6 @@ in
 
   config = {
     apps.single-user-config = {
-      tags = [ "single-user" ];
       nixos =
         { host, ... }:
         {
