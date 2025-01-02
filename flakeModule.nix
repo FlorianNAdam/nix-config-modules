@@ -25,7 +25,7 @@ in
     nix-config = mkOption {
       type = types.submoduleWith {
         modules = (import ./modules/all-modules.nix) ++ [
-          # { _module.args.inputs = inputs; }
+          { _module.args.inputs = inputs; }
         ];
       };
     };
