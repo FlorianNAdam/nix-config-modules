@@ -34,6 +34,7 @@ let
               options = {
                 nix-config2 = mkOption {
                   type = types.listOf types.deferredModule;
+                  default = [ ];
                 };
               };
             };
