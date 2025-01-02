@@ -27,6 +27,9 @@ let
           };
         };
       };
+
+      config._internal.nixosModules = [ config.nix-config2.nixos ];
+
     };
 
   hostSubmodule = types.submodule (
@@ -42,11 +45,7 @@ let
         '';
       };
       config._internal.nixosModules =
-        [ customModule2 ]
-        ++ globalNixosModules
-        ++ [ config.nixos ]
-        ++ config.modules2
-        ++ [ config.nix-config2.nixos ];
+        [ customModule2 ] ++ globalNixosModules ++ [ config.nixos ] ++ config.modules2;
     }
   );
 
