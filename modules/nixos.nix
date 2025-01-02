@@ -26,10 +26,7 @@ let
         '';
       };
       config._internal.nixosModules =
-        globalNixosModules
-        ++ (map (app: app.nixos) config._internal.apps)
-        ++ [ config.nixos ]
-        ++ [ config.nixos2 ];
+        globalNixosModules ++ (map (app: app.nixos) config._internal.apps) ++ [ config.nixos ];
     }
   );
 
@@ -45,16 +42,6 @@ in
         Exported NixOS configurations, which can be used in your flake.
       '';
     };
-
-    nixos2 = mkOption {
-      type = types.deferredModule;
-      default = { };
-      description = lib.mdDoc ''
-        NixOS configurations. See the [NixOS manual](https://nixos.org/manual/nixos/stable/#ch-configuration)
-        for more information.
-      '';
-    };
-
   };
   config.nixosConfigurations = mapAttrs (
     _: host:
