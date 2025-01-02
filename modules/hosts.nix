@@ -120,5 +120,9 @@ in
         };
       '';
     };
+
+    specialArgs = mkOption {
+      type = types.raw;
+    };
   };
 }
