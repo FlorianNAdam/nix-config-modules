@@ -8,6 +8,5 @@
   ./nixpkgs.nix
   ./apps/defaults.nix
   ./apps/single-user.nix
-  ./apps/getting-started.nix
   ./apps/home-manager.nix
 ]
