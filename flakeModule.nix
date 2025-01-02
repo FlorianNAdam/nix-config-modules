@@ -1,12 +1,20 @@
-{ config, lib, inputs, flake-parts-lib, ... }: let
+{
+  config,
+  lib,
+  inputs,
+  flake-parts-lib,
+  ...
+}:
+let
   inherit (lib)
     mkOption
     types
-  ;
+    ;
   inherit (flake-parts-lib)
     mkSubmoduleOptions
-  ;
-in {
+    ;
+in
+{
   options = {
     # compatibility layer for home-manager
     flake.homeConfigurations = mkOption {
@@ -17,7 +25,7 @@ in {
     nix-config = mkOption {
       type = types.submoduleWith {
         modules = (import ./modules/all-modules.nix) ++ [
-          { _module.args.inputs = inputs; }
+          # { _module.args.inputs = inputs; }
         ];
       };
     };
@@ -26,7 +34,7 @@ in {
   config = {
     flake = {
       homeConfigurations = config.nix-config.homeConfigurations;
-      nixosConfigurations =  config.nix-config.nixosConfigurations;
+      nixosConfigurations = config.nix-config.nixosConfigurations;
     };
   };
 }
