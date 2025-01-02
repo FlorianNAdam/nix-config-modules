@@ -42,15 +42,19 @@ let
                     options = {
                       nixos = mkOption {
                         type = types.deferredModule;
+                        default = { };
                       };
                       home = mkOption {
                         type = types.deferredModule;
+                        default = { };
                       };
                       nixpkgs = mkOption {
                         type = types.deferredModule;
+                        default = { };
                       };
                     };
                   };
+                  default = { };
                 };
               };
             };
