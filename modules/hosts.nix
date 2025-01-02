@@ -92,13 +92,12 @@ let
 
       };
 
-      config =
-        {
-          inherit name;
-        }
-        // lib.evalModules {
+      config = {
+        inherit name;
+        _internal.nixosModules = lib.evalModules {
           modules = config.modules;
         };
+      };
     }
   );
 in
