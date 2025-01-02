@@ -5,27 +5,26 @@
 {
   config = {
     apps.hm-single-user-integration = {
-      enablePredicate = { host, ... }:
-        host.tags.home-manager && host.tags.single-user;
+      enablePredicate = { host, ... }: host.tags.home-manager && host.tags.single-user;
 
-      nixos = { host, ... }: {
-        imports = [
-          inputs.home-manager.nixosModules.home-manager
-        ];
+      nixos =
+        { host, ... }:
+        {
+          imports = [
+            inputs.home-manager.nixosModules.home-manager
+          ];
 
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          extraSpecialArgs = {
-            inherit host;
-          };
-          users.${host.username} = {
-            imports = host._internal.homeModules;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = {
+              inherit host;
+            };
+            users.${host.username} = {
+              imports = host._internal.homeModules;
+            };
           };
         };
-      };
     };
-
-    defaultTags.home-manager = true;
   };
 }
