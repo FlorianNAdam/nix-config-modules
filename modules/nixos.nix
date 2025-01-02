@@ -49,11 +49,11 @@ let
           customModules =
             (lib.evalModules {
               modules = [ customModule2 ] ++ config.modules2;
-            }).config.nix-config2.nixos;
+            }).config.nixos;
           customHomeModules =
             (lib.evalModules {
               modules = [ customModule2 ] ++ config.modules2;
-            }).config.nix-config2.home;
+            }).config.home;
         in
         {
           _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ customModules ];
