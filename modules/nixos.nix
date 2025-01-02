@@ -33,7 +33,7 @@ let
             {
               options = {
                 nix-config2 = mkOption {
-                  type = types.listOf types.deferredModule;
+                  type = types.deferredModule;
                   default = [ ];
                 };
               };
@@ -44,7 +44,7 @@ let
             }).config.nix-config2;
         in
         {
-          _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ customModules;
+          _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ customModules ];
         };
     }
   );
