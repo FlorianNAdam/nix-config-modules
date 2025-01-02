@@ -25,7 +25,12 @@ let
           using `host.<name>.nixos` instead.
         '';
       };
-      config._internal.nixosModules = globalNixosModules ++ [ config.nixos ];
+      config._internal.nixosModules =
+        globalNixosModules
+        ++ [ config.nixos ]
+        ++ lib.evalModules {
+          modules = config.modules;
+        };
     }
   );
 

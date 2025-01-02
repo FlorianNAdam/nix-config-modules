@@ -94,9 +94,6 @@ let
 
       config = {
         inherit name;
-        _internal.nixosModules = lib.evalModules {
-          modules = config.modules;
-        };
       };
     }
   );
