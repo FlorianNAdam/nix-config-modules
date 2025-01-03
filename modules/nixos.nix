@@ -115,7 +115,7 @@ let
         in
         {
           _internal.nixosModules =
-            builtins.addErrorContext "building _internal.nixosModules" globalNixosModules
+            globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
             ++ [ nixosCoreModule ]
