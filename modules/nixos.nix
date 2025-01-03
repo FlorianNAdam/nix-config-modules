@@ -16,7 +16,7 @@ let
   outer_config = config;
 
   hostSubmodule = types.submodule (
-    { config, host, ... }:
+    { config, ... }:
     {
       options._internal.nixosModules = mkOption {
         type = types.listOf types.deferredModule;
@@ -30,6 +30,36 @@ let
 
       config =
         let
+          userModule =
+            { host, ... }:
+            {
+
+              nix = {
+                registry = {
+                  nixpkgs.flake = inputs.nixpkgs;
+                };
+
+                settings = {
+                  trusted-users = [
+                    "root"
+                    host.username
+                  ];
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                };
+              };
+
+              users.users.${host.username} = {
+                isNormalUser = true;
+                home = host.homeDirectory;
+                group = host.username;
+                description = host.username;
+              };
+              users.groups.${host.username} = { };
+
+            };
           customModule2 =
             { config, host, ... }:
             {
@@ -50,7 +80,7 @@ let
             };
           customModules =
             (lib.evalModules {
-              modules = [ customModule2 ] ++ config.modules;
+              modules = [ customModule2 ] ++ [ userModule ] ++ config.modules;
             }).config.nixos;
           customHomeModules =
             (lib.evalModules {
@@ -62,36 +92,7 @@ let
             globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
-            ++ [ { _module.args = outer_config.specialArgs; } ]
-            ++ [
-              {
-                nix = {
-                  registry = {
-                    nixpkgs.flake = inputs.nixpkgs;
-                  };
-
-                  settings = {
-                    trusted-users = [
-                      "root"
-                      host.username
-                    ];
-                    experimental-features = [
-                      "nix-command"
-                      "flakes"
-                    ];
-                  };
-                };
-
-                users.users.${host.username} = {
-                  isNormalUser = true;
-                  home = host.homeDirectory;
-                  group = host.username;
-                  description = host.username;
-                };
-                users.groups.${host.username} = { };
-
-              }
-            ];
+            ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ];
         };
     }
