@@ -56,7 +56,13 @@ let
             }).config.home;
         in
         {
-          _internal.nixosModules = globalNixosModules ++ [ config.nixos ] ++ [ customModules ];
+          _internal.nixosModules =
+            globalNixosModules
+            ++ [ config.nixos ]
+            ++ [ customModules ]
+            ++ [
+              { _module.args.inputs = config.specialArgs; }
+            ];
           _internal.homeModules = [ customHomeModules ];
         };
     }
