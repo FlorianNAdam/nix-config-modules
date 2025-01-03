@@ -119,6 +119,7 @@ let
             ++ [ config.nixos ]
             ++ [ customModules ]
             ++ [ nixosCoreModule ]
+            ++ [ { _module.args.test_var = "hallo welt"; } ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ] ++ [ homeCoreModule ]; # ++ [ { _module.args = outer_config.specialArgs; } ];
         };
