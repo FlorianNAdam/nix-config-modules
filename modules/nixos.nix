@@ -62,7 +62,7 @@ let
             globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
-            ++ [ { _module.args = outer_config.nix-config.specialArgs; } ];
+            ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ];
         };
     }
