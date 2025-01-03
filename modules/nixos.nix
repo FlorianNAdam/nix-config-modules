@@ -70,6 +70,18 @@ let
                 };
               };
             };
+          homeCoreModule =
+            { host, ... }:
+            {
+              home = {
+                username = "${host.username}";
+                homeDirectory = "${host.homeDirectory}";
+              };
+
+              programs.home-manager.enable = true;
+
+              systemd.user.startServices = "sd-switch";
+            };
           customModule2 =
             { config, host, ... }:
             {
@@ -104,7 +116,8 @@ let
             ++ [ customModules ]
             ++ [ nixosCoreModule ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
-          _internal.homeModules = [ customHomeModules ] ++ [ { _module.args = outer_config.specialArgs; } ];
+          _internal.homeModules =
+            [ customHomeModules ] ++ [ homeCoreModule ] ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
   );
