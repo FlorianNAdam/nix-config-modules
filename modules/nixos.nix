@@ -59,10 +59,6 @@ let
               };
               users.groups.${host.username} = { };
 
-            };
-          homeCoreModule =
-            { host, ... }:
-            {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -108,8 +104,7 @@ let
             ++ [ customModules ]
             ++ [ nixosCoreModule ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
-          _internal.homeModules =
-            [ customHomeModules ] ++ [ homeCoreModule ] ++ [ { _module.args = outer_config.specialArgs; } ];
+          _internal.homeModules = [ customHomeModules ] ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
   );
