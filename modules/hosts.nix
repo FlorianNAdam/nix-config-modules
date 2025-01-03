@@ -1,4 +1,9 @@
-{ inputs, lib, ... }@args:
+{
+  inputs,
+  lib,
+  config,
+  ...
+}@args:
 let
   inherit (lib)
     filterAttrs
@@ -124,5 +129,11 @@ in
     specialArgs = mkOption {
       type = types.raw;
     };
+  };
+
+  config = {
+    _internal.nixosModules = [
+      { _module.args.inputs = config.specialArgs; }
+    ];
   };
 }
