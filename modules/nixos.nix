@@ -104,7 +104,7 @@ let
                 };
               };
             };
-          customModules =
+          customNixosModules =
             (lib.evalModules {
               modules = [ customModule2 ] ++ config.modules;
             }).config.nixos;
@@ -117,10 +117,8 @@ let
           _internal.nixosModules =
             globalNixosModules
             ++ [ config.nixos ]
-            ++ [ customModules ]
+            ++ [ customNixosModules ]
             ++ [ nixosCoreModule ]
-            ++ [ { _module.args.test_var = "hallo welt"; } ]
-            ++ [ { _module.args.inputs2 = outer_config.specialArgs.inputs; } ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ] ++ [ homeCoreModule ]; # ++ [ { _module.args = outer_config.specialArgs; } ];
         };
