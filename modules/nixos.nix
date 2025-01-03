@@ -30,7 +30,7 @@ let
 
       config =
         let
-          userModule =
+          nixosCoreModule =
             { host, ... }:
             {
 
@@ -59,6 +59,20 @@ let
               };
               users.groups.${host.username} = { };
 
+            };
+          homeCoreModule =
+            { host, ... }:
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit host;
+                };
+                users.${host.username} = {
+                  imports = host._internal.homeModules;
+                };
+              };
             };
           customModule2 =
             { config, host, ... }:
@@ -92,9 +106,10 @@ let
             globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
-            ++ [ userModule ]
+            ++ [ nixosCoreModule ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
-          _internal.homeModules = [ customHomeModules ];
+          _internal.homeModules =
+            [ customHomeModules ] ++ [ homeCoreModule ] ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
   );
