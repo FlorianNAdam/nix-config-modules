@@ -69,6 +69,8 @@ let
                   imports = host._internal.homeModules;
                 };
               };
+
+              system.stateVersion = config.stateVersion;
             };
           homeCoreModule =
             { host, ... }:
@@ -81,6 +83,8 @@ let
               programs.home-manager.enable = true;
 
               systemd.user.startServices = "sd-switch";
+
+              home.stateVersion = config.stateVersion;
             };
           customModule2 =
             { config, host, ... }:
