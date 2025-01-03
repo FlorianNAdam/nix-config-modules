@@ -16,7 +16,7 @@ let
   outer_config = config;
 
   hostSubmodule = types.submodule (
-    { config, ... }:
+    { config, host, ... }:
     {
       options._internal.nixosModules = mkOption {
         type = types.listOf types.deferredModule;
@@ -62,7 +62,36 @@ let
             globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
-            ++ [ { _module.args = outer_config.specialArgs; } ];
+            ++ [ { _module.args = outer_config.specialArgs; } ]
+            ++ [
+              {
+                nix = {
+                  registry = {
+                    nixpkgs.flake = inputs.nixpkgs;
+                  };
+
+                  settings = {
+                    trusted-users = [
+                      "root"
+                      host.username
+                    ];
+                    experimental-features = [
+                      "nix-command"
+                      "flakes"
+                    ];
+                  };
+                };
+
+                users.users.${host.username} = {
+                  isNormalUser = true;
+                  home = host.homeDirectory;
+                  group = host.username;
+                  description = host.username;
+                };
+                users.groups.${host.username} = { };
+
+              }
+            ];
           _internal.homeModules = [ customHomeModules ];
         };
     }
