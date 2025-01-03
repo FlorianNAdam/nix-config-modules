@@ -115,8 +115,11 @@ let
         in
         {
           _internal.nixosModules =
-            globalNixosModules ++ [ config.nixos ] ++ [ customModules ] ++ [ nixosCoreModule ];
-          # ++ [ { _module.args = outer_config.specialArgs; } ];
+            globalNixosModules
+            ++ [ config.nixos ]
+            ++ [ customModules ]
+            ++ [ nixosCoreModule ]
+            ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ] ++ [ homeCoreModule ]; # ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
