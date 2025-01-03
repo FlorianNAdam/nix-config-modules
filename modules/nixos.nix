@@ -80,7 +80,7 @@ let
             };
           customModules =
             (lib.evalModules {
-              modules = [ customModule2 ] ++ [ userModule ] ++ config.modules;
+              modules = [ customModule2 ] ++ config.modules;
             }).config.nixos;
           customHomeModules =
             (lib.evalModules {
@@ -92,6 +92,7 @@ let
             globalNixosModules
             ++ [ config.nixos ]
             ++ [ customModules ]
+            ++ [ userModule ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ];
         };
