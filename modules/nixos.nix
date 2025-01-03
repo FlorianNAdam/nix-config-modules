@@ -48,11 +48,11 @@ let
             };
           customModules =
             (lib.evalModules {
-              modules = [ customModule2 ] ++ config.modules2;
+              modules = [ customModule2 ] ++ config.modules;
             }).config.nixos;
           customHomeModules =
             (lib.evalModules {
-              modules = [ customModule2 ] ++ config.modules2;
+              modules = [ customModule2 ] ++ config.modules;
             }).config.home;
         in
         {
