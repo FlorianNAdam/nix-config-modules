@@ -130,10 +130,4 @@ in
       type = types.raw;
     };
   };
-
-  config = {
-    _internal.nixosModules = [
-      { _module.args.inputs = config.specialArgs; }
-    ];
-  };
 }
