@@ -121,7 +121,7 @@ let
             ++ [ nixosCoreModule ]
             ++ [ { _module.args.test_var = "hallo welt"; } ]
             ++ [ { _module.args.inputs = outer_config.specialArgs.inputs; } ]
-            ++ [ { _module.args = outer_config.specialArgs; } ];
+            # ++ [ { _module.args = outer_config.specialArgs; } ];
           _internal.homeModules = [ customHomeModules ] ++ [ homeCoreModule ]; # ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
