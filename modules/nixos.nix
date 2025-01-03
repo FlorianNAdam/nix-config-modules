@@ -120,8 +120,7 @@ let
             ++ [ customModules ]
             ++ [ nixosCoreModule ]
             ++ [ { _module.args = outer_config.specialArgs; } ];
-          _internal.homeModules =
-            [ customHomeModules ] ++ [ homeCoreModule ] ++ [ { _module.args = outer_config.specialArgs; } ];
+          _internal.homeModules = [ customHomeModules ] ++ [ homeCoreModule ]; # ++ [ { _module.args = outer_config.specialArgs; } ];
         };
     }
   );
